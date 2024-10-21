@@ -38,10 +38,24 @@ class ShoppingCartImplementation implements ShoppingCart {
 
     }
 
-
     removeItem(id: number, quantity?: number): void {
-        this.items = this.items.filter(item => item.id !== id);
+        console.log(`Attempting to remove item with ID: ${id}`);
+        const item = this.items.find(item => item.id === id);
+        
+        if (!item) {
+            console.log(`Item with ID ${id} not found.`);
+            return;
+        }
 
+        if (quantity && quantity < item.quantity) {
+            item.quantity -= quantity;
+            console.log(`Reduced quantity of item ${item.name} to ${item.quantity}`);
+        } else {
+            this.items = this.items.filter(item => item.id !== id);
+            console.log(`Item ${item.name} removed from cart.`);
+        }
+
+        console.log("Updated cart:", this.items);
     }
     updateQuantity(id: number, quantity: number): void {
         const filteritem = this.items.filter(item => item.id === id);
@@ -105,3 +119,6 @@ cart.addItem({
 
 const total = cart.calculateTotal();
 console.log(total);
+console.log('initial cart',cart.items);
+
+cart.removeItem(1)
