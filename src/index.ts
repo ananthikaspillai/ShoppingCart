@@ -58,11 +58,17 @@ class ShoppingCartImplementation implements ShoppingCart {
         console.log("Updated cart:", this.items);
     }
     updateQuantity(id: number, quantity: number): void {
-        const filteritem = this.items.filter(item => item.id === id);
-        if (filteritem.length > 0) {
-            filteritem[0].quantity = quantity;
+        console.log(`Updating quantity of item with ID: ${id} to ${quantity}`);
+        const item = this.items.find(item => item.id === id);
+
+        if (item) {
+            item.quantity = quantity;
+            console.log(`Updated ${item.name} quantity to ${item.quantity}`);
+        } else {
+            console.log(`Item with ID ${id} not found.`);
         }
 
+        console.log("Updated cart:", this.items);
     }
     calculateTotal(): {
         subtotal: number;
