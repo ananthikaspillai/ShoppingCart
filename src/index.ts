@@ -5,7 +5,7 @@ interface CartItem {
     quantity: number;
     category: "electronics" | "clothing" | "books" | "food";
     discountable: boolean;
-    weightInKg?: number; 
+    weightInKg?: number;
 }
 interface DiscountRule {
     category?: "electronics" | "clothing" | "books" | "food";
@@ -31,77 +31,77 @@ interface ShoppingCart {
 
 class ShoppingCartImplementation implements ShoppingCart {
     items: CartItem[] = [];
-   
+
     addItem(item: CartItem): void {
         this.items.push(item)
         console.log(item);
-        
+
     }
- 
-    
+
+
     removeItem(id: number, quantity?: number): void {
-        this.items=this.items.filter(item => item.id !==id);
-        
+        this.items = this.items.filter(item => item.id !== id);
+
     }
     updateQuantity(id: number, quantity: number): void {
         const filteritem = this.items.filter(item => item.id === id);
-        if (filteritem.length>0) {
-            filteritem[0].quantity=quantity;
+        if (filteritem.length > 0) {
+            filteritem[0].quantity = quantity;
         }
-        
+
     }
     calculateTotal(): {
-         subtotal: number;
-         discount: number; 
-         shipping: number; 
-         total: number; 
-         appliedDiscounts: string[]; 
-        } {
-         let subtotal = 0;
-         let discount = 0;
-         const appliedDiscounts:string[] = []
+        subtotal: number;
+        discount: number;
+        shipping: number;
+        total: number;
+        appliedDiscounts: string[];
+    } {
+        let subtotal = 0;
+        let discount = 0;
+        const appliedDiscounts: string[] = []
 
-         this.items.forEach(item =>{
-         subtotal += item.price * item.quantity
-         })
+        this.items.forEach(item => {
+            subtotal += item.price * item.quantity
+        })
         discount = subtotal * 0.1;
-     appliedDiscounts.push('discount added')
+        appliedDiscounts.push('discount added')
 
-     const shipping = 50;
-     const total = subtotal-discount + shipping
-     return{
-        subtotal,
-        discount,
-        shipping,
-        total,
-        appliedDiscounts
-     }
-       } 
-    
+        const shipping = 50;
+        const total = subtotal - discount + shipping
+        return {
+            subtotal,
+            discount,
+            shipping,
+            total,
+            appliedDiscounts
+        }
+    }
+
     // getItemsByCategory(): Record<string, CartItem[]> {
-        
+
     // }
 
 }
 
 const cart = new ShoppingCartImplementation()
 cart.addItem({
- id: 1,
-name: "Laptop",
-price: 999.99,
-quantity: 1,
-category: "electronics",
-discountable: true
+    id: 1,
+    name: "Laptop",
+    price: 999.99,
+    quantity: 1,
+    category: "electronics",
+    discountable: true
 })
 cart.addItem({
     id: 2,
-   name: "Wings",
-   price: 100,
-   quantity: 2,
-   category: "books",
-   discountable: true
-   })
+    name: "Wings",
+    price: 100,
+    quantity: 2,
+    category: "books",
+    discountable: true
+})
 
- 
+
 const total = cart.calculateTotal();
 console.log(total);
