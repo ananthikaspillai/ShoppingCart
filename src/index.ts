@@ -25,7 +25,7 @@ interface ShoppingCart {
         total: number;
         appliedDiscounts: string[];
     };
-    // getItemsByCategory(): Record<string, CartItem[]>;
+    getItemsByCategory(): Record<string, CartItem[]>;
 }
 
 
@@ -98,9 +98,12 @@ class ShoppingCartImplementation implements ShoppingCart {
         }
     }
 
-    // getItemsByCategory(): Record<string, CartItem[]> {
-
-    // }
+    getItemsByCategory(): Record<string, CartItem[]> {
+        return this.items.reduce((acc, item) => {
+            (acc[item.category] ||= []).push(item);
+            return acc;
+        }, {} as Record<string, CartItem[]>);
+    }
 
 }
 
