@@ -43,7 +43,7 @@ class ShoppingCartImplementation implements ShoppingCart {
         const item = this.items.find(item => item.id === id);
         
         if (!item) {
-            console.log(`Item with ID ${id} not found.`);
+            console.log(`Item with ID ${id} not available`);
             return;
         }
 
@@ -58,14 +58,14 @@ class ShoppingCartImplementation implements ShoppingCart {
         console.log("Updated cart:", this.items);
     }
     updateQuantity(id: number, quantity: number): void {
-        console.log(`Updating quantity of item with ID: ${id} to ${quantity}`);
+        console.log(`Updating quantity of item with : ${id} to ${quantity}`);
         const item = this.items.find(item => item.id === id);
 
         if (item) {
             item.quantity = quantity;
             console.log(`Updated ${item.name} quantity to ${item.quantity}`);
         } else {
-            console.log(`Item with ID ${id} not found.`);
+            console.log(`Item with id ${id} not available`);
         }
 
         console.log("Updated cart:", this.items);
