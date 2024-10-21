@@ -1,10 +1,9 @@
 var ShoppingCartImplementation = /** @class */ (function () {
     function ShoppingCartImplementation() {
         this.items = [];
-        // getItemsByCategory(): Record<string, CartItem[]> {
-        // }
+      
     }
-    // private discountRule : DiscountRule[] =[]
+
     ShoppingCartImplementation.prototype.addItem = function (item) {
         this.items.push(item);
     };
